@@ -7,6 +7,9 @@ const userSchema = mongoose.Schema({
     phone : Number,
     password : String,
     college : String,
+    img: String,
+    amount: String,
+    account: String
 }, {
     versionKey : false
 })

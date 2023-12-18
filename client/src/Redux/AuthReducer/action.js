@@ -4,7 +4,7 @@ import axios from "axios";
 export const UserLogin = (userdata) => (dispatch) => {
   dispatch({ type: LOGINSIGNUP_REQUEST });
   return axios.post(
-    "https://scholarpay-server.onrender.com/users/login",
+    "http://localhost:8080/users/login",
     userdata
   );
 };
@@ -12,7 +12,7 @@ export const UserLogin = (userdata) => (dispatch) => {
 export const UserSignUp = (userdata) => (dispatch) => {
   dispatch({ type: LOGINSIGNUP_REQUEST });
   return axios.post(
-    "https://scholarpay-server.onrender.com/users/register",
+    "http://localhost:8080/users/register",
     userdata
   );
 };
@@ -25,7 +25,7 @@ export const UserLogout = (token) => (dispatch) => {
     },
   };
   return axios.post(
-    "https://scholarpay-server.onrender.com/users/logout",
+    "http://localhost:8080/users/logout",
     {},
     config
   );

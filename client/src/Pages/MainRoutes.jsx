@@ -6,6 +6,13 @@ import { SignUp } from "./SignUp";
 import { Dashboard } from "./Dashboard";
 import { Admin } from "./Admin";
 import { PrivateRoute } from "../Components/PrivateRoute";
+import Payments from "./Payments";
+import { SacanAndPay } from "./SacanAndPay";
+import ScanAndPayForm from "../Components/ScanAndPayForm";
+import BankTransfer from "./BankTransfer";
+import Merchant from "./Merchant";
+import Emergency from "./Emergency";
+import AccountDetails from "./AccountDetails";
 
 export const MainRoutes = () => {
   return (
@@ -30,6 +37,20 @@ export const MainRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/payments"
+          element={
+            <PrivateRoute>
+              <Payments />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/payments/scan&pay" element={<SacanAndPay />} />
+        <Route path="/payments/scan&pay/pay/:id" element={<ScanAndPayForm />} />
+        <Route path="/payments/banktransfer" element={<BankTransfer />} />
+        <Route path="/payments/merchant" element={<Merchant />} />
+        <Route path="/payments/Emergency" element={<Emergency />} />
+        <Route path="/accountDetails" element={<AccountDetails />} />
       </Routes>
     </div>
   );

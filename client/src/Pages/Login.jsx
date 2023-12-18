@@ -8,6 +8,8 @@ import { useToast } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
+
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +17,7 @@ export const Login = () => {
   const toast = useToast()
   const location = useLocation();
   const navigate = useNavigate();
+  
 
   const handleLogin = () => {
     let data = {
@@ -25,15 +28,22 @@ export const Login = () => {
     dispatch(UserLogin(data))
       .then((res) => {
         dispatch({ type: LOGINSIGNUP_SUCCESS });
-        console.log(res)
+        console.log(res.data)
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userImage", res.data.user.img);
+        localStorage.setItem("username", res.data.user.name);
+        localStorage.setItem("userID", res.data.user._id);
         toast({
           title: res.data.msg,
           status: 'success',
           duration: 2000,
           isClosable: true,
         })
-        navigate(location.state, {replace : true});
+        if(location.state){
+          navigate(location.state, {replace : true});
+        }else{
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error)

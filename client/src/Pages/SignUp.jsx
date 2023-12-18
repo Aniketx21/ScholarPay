@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { UserSignUp } from "../Redux/AuthReducer/action";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGINSIGNUP_FALIURE, LOGINSIGNUP_SUCCESS } from "../Redux/actionTypes";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -22,28 +22,32 @@ export const SignUp = () => {
       password,
       college: "",
       phone: "",
+      img: "",
+      amount: "",
+      account: "",
     };
-    dispatch(UserSignUp(data)).then((res)=>{
-      dispatch({type : LOGINSIGNUP_SUCCESS})
-      toast({
-        title: res.data.msg,
-        description: "We've created your account for you.",
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
+    dispatch(UserSignUp(data))
+      .then((res) => {
+        dispatch({ type: LOGINSIGNUP_SUCCESS });
+        toast({
+          title: res.data.msg,
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        navTo("/login");
       })
-      navTo("/login");
-    })
-    .catch((error) =>{
-      dispatch({type : LOGINSIGNUP_FALIURE})
-      console.log(error);
-      toast({
-        title: error.response.data.error,
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-      })
-    })
+      .catch((error) => {
+        dispatch({ type: LOGINSIGNUP_FALIURE });
+        console.log(error);
+        toast({
+          title: error.response.data.error,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
@@ -81,7 +85,9 @@ export const SignUp = () => {
         </FormControl>
 
         <Box mt={5}>
-          <Link to={"/login"}>Already have a account? <span className="loginlink">Login</span></Link>
+          <Link to={"/login"}>
+            Already have a account? <span className="loginlink">Login</span>
+          </Link>
         </Box>
 
         <Button
@@ -109,7 +115,7 @@ const DIV = styled.div`
     border-radius: 5px;
   }
 
-  .loginlink{
+  .loginlink {
     font-style: italic;
     text-decoration: underline;
     color: red;
